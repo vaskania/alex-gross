@@ -33,7 +33,7 @@ export const Button = ({
       gap: "10px",
     }}
   >
-    {leftArrow && <ArrowLeft />} {label}{" "}
-    {rightArrow && <ArrowCircleRight size={22} />}{" "}
+    {leftArrow && <ArrowLeft />} {label}
+    {rightArrow && <ArrowCircleRight size={22} />}
   </button>
 );
