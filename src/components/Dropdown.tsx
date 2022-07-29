@@ -3,14 +3,16 @@ import classes from "../styles/dropdown.module.css";
 import { Triagle } from "./Triagle";
 
 interface IDropdown {
-  label: string;
-  value: string;
+  data: {
+    label: string;
+    value: string;
+  }[];
+  change: (e: any) => void;
 }
 
-export const Dropdown = ({ data }: { data: IDropdown[] }) => {
+export const Dropdown = ({ data, change }: IDropdown) => {
   const [open, setOpen] = useState<boolean>(false);
   const notSelectedTesxt = "please choose your country";
-  const [selected, setSelected] = useState<string>(notSelectedTesxt);
 
   return (
     <section className={classes.dropdownContainer}>
@@ -25,9 +27,17 @@ export const Dropdown = ({ data }: { data: IDropdown[] }) => {
         <div className={classes.options}>
           {data.map(({ label, value }) => {
             return (
-              <span key={value} onClick={() => setSelected(value)}>
+              <option
+                key={value}
+                style={{
+                  padding: "10px 0",
+                  cursor: "pointer",
+                }}
+                onClick={(e: any) => console.log(e.target.value)}
+                value={value}
+              >
                 {label}
-              </span>
+              </option>
             );
           })}
         </div>

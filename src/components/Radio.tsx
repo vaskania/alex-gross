@@ -1,59 +1,24 @@
-import { Check } from "phosphor-react";
-import { useState } from "react";
-import classes from "../styles/radio.module.css";
-type RadionButtonType = "single" | "multi";
+import { ChangeEventHandler } from "react";
+import classes from "../styles/checkbox.module.css";
 
-interface IRadionButton {
-  type: RadionButtonType;
+interface IRadio {
   data: {
     label: string;
     value: string;
   }[];
+  onChange: ChangeEventHandler<any>;
 }
 
-const Item = ({
-  label,
-  click,
-  value,
-  isCurrent,
-}: {
-  value: string;
-  label: string;
-  click: any;
-  isCurrent: boolean;
-}) => {
-  const [isChecked, setChecked] = useState<boolean>(isCurrent);
-
+export const Radio = ({ data, onChange }: IRadio) => {
   return (
-    <div key={value} className={classes.checkboxItem}>
-      <span
-        onClick={() => {
-          click();
-          setChecked((c) => !c);
-        }}
-        className={isChecked && isCurrent ? classes.checked : ""}
-      >
-        {isCurrent && isChecked && <Check />}
-      </span>
-      <span>{label}</span>
-    </div>
-  );
-};
-
-export const RadioButtons = ({ data, type }: IRadionButton) => {
-  const [current, setCurrent] = useState("ger");
-
-  return (
-    <section className={classes.container}>
+    <div className={classes.checkboxContainer} onChange={onChange}>
       {data.map(({ label, value }) => (
-        <Item
-          key={value}
-          label={label}
-          value={value}
-          isCurrent={value === current}
-          click={() => setCurrent(value)}
-        />
+        <label className={classes.container}>
+          {label}
+          <input type="radio" value={value} name="survey" />
+          <span className={classes.checkmark}></span>
+        </label>
       ))}
-    </section>
+    </div>
   );
 };
