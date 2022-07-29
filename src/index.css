@@ -17,3 +17,8 @@ html {
     font-family: "Inter var", sans-serif;
   }
 }
+
+::selection {
+  background-color: #fff;
+  color: #000;
+}
