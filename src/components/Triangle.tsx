@@ -1,4 +1,4 @@
-export const Triagle = ({ rotate }: { rotate: boolean }) => {
+export const Triangle = ({ rotate }: { rotate: boolean }) => {
   return (
     <div
       style={{

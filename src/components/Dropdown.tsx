@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classes from "../styles/dropdown.module.css";
-import { Triagle } from "./Triagle";
+import { Triangle } from "./Triangle";
 
 interface IDropdown {
   data: {
@@ -12,8 +12,8 @@ interface IDropdown {
 
 export const Dropdown = ({ data, handleChange }: IDropdown) => {
   const [open, setOpen] = useState<boolean>(false);
-  const notSelectedTesxt = "please choose your country";
-  const [current, setCurrent] = useState<string>(notSelectedTesxt);
+  const notSelectedText = "please choose your country";
+  const [current, setCurrent] = useState<string>(notSelectedText);
 
   return (
     <section className={classes.dropdownContainer}>
@@ -22,7 +22,7 @@ export const Dropdown = ({ data, handleChange }: IDropdown) => {
         onClick={() => setOpen((open) => !open)}
       >
         <p>{current}</p>
-        <Triagle rotate={open} />
+        <Triangle rotate={open} />
       </div>
       {open && (
         <div className={classes.options}>
