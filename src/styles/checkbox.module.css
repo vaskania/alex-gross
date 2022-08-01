@@ -29,7 +29,10 @@
   height: 25px;
   width: 25px;
   border-radius: 50%;
-  background-color: #eee;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.checkmarkSquare {
+  border-radius: 0px;
 }
 
 .container:hover input ~ .checkmark {

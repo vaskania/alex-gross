@@ -1,11 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
-import { Dropdown } from "./components/Dropdown";
 import { Wrapper } from "./components/Wrapper";
 import { ContextProvider } from "./context/App.context";
-
-import { Router } from "./routes/Router";
 import { Question } from "./components/Question";
-
+import { Questions } from "./pages/Questions";
+import { Router } from "./routes/Router";
 function App() {
   return (
     <ContextProvider>
@@ -25,22 +23,7 @@ function App() {
               { label: "Sweden", value: "swe" },
             ]}
           /> */}
-
-          <Question
-            answers={[
-              { label: "germany", point: 12, value: "ger" },
-              { label: "germany", point: 12, value: "ger" },
-            ]}
-            body="mevida miqela"
-            question={1}
-            type="select"
-          />
-          <Dropdown
-            change={(e) => {
-              console.log(e.value);
-            }}
-            data={[{ label: "mevida", value: "miqela" }]}
-          />
+          <Router />
         </Wrapper>
       </BrowserRouter>
     </ContextProvider>

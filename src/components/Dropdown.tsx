@@ -7,12 +7,13 @@ interface IDropdown {
     label: string;
     value: string;
   }[];
-  change: (e: any) => void;
+  handleChange: (e: string) => void;
 }
 
-export const Dropdown = ({ data, change }: IDropdown) => {
+export const Dropdown = ({ data, handleChange }: IDropdown) => {
   const [open, setOpen] = useState<boolean>(false);
   const notSelectedTesxt = "please choose your country";
+  const [current, setCurrent] = useState<string>(notSelectedTesxt);
 
   return (
     <section className={classes.dropdownContainer}>
@@ -20,7 +21,7 @@ export const Dropdown = ({ data, change }: IDropdown) => {
         className={classes.dropdown}
         onClick={() => setOpen((open) => !open)}
       >
-        <p>{notSelectedTesxt}</p>
+        <p>{current}</p>
         <Triagle rotate={open} />
       </div>
       {open && (
@@ -33,7 +34,11 @@ export const Dropdown = ({ data, change }: IDropdown) => {
                   padding: "10px 0",
                   cursor: "pointer",
                 }}
-                onClick={(e: any) => console.log(e.target.value)}
+                onClick={(e: any) => {
+                  handleChange(e.target.value);
+                  setCurrent(label);
+                  setOpen(false);
+                }}
                 value={value}
               >
                 {label}

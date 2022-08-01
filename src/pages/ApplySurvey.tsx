@@ -26,6 +26,7 @@ export const ApplySurvey = () => {
         size={10}
         onClick={() => {
           ctx?.name.setName(name);
+          navigate("/questions");
         }}
         disabled={!name.trim().length}
       />

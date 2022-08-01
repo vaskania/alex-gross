@@ -1,14 +1,19 @@
-import { Radio } from "./Radio";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/App.context";
+import { Dropdown } from "./Dropdown";
+import { MultiSelect } from "./MultiSelect";
+import { Select } from "./Radio";
+import classes from "../styles/question.module.css";
 
-type QuestionType = "multiselect" | "select" | "dropdown";
+export type QuestionType = "multiselect" | "select" | "dropdown";
 
-type Answer = {
+export type Answer = {
   label: string;
   value: string;
   point: number;
 };
 
-interface IQuestion {
+export interface IQuestion {
   type: QuestionType;
   body: string;
   answers: Answer[];
@@ -16,14 +21,47 @@ interface IQuestion {
 }
 
 export const Question = ({ answers, body, type, question }: IQuestion) => {
+  const ctx = useContext(AppContext);
+
   return (
-    <section>
+    <section className={classes.question}>
       <p>QUESTION {question}</p>
       <h1>{body}</h1>
       {type === "select" ? (
-        <Radio data={answers} onChange={(e) => console.log(e.target.value)} />
+        <Select
+          data={answers}
+          onChange={(e: any) => {
+            ctx?.selectedAnswers.setAnswers({
+              point: answers.find((a) => a.value == e.target.value)
+                ?.point as number,
+              value: e.target.value,
+              type: "select",
+            });
+          }}
+        />
+      ) : type == "multiselect" ? (
+        <MultiSelect
+          data={answers}
+          onChange={(e: any) => {
+            ctx?.selectedAnswers.setAnswers({
+              point: answers.find((a) => a.value == e.target.value)
+                ?.point as number,
+              value: e.target.value,
+              type: "multiselect",
+            });
+          }}
+        />
       ) : (
-        ""
+        <Dropdown
+          data={answers}
+          handleChange={(val: any) =>
+            ctx?.selectedAnswers.setAnswers({
+              point: answers.find((a) => a.value == val)?.point as number,
+              value: val,
+              type: "dropdown",
+            })
+          }
+        />
       )}
     </section>
   );

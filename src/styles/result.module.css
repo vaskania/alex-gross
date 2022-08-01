@@ -1,0 +1,12 @@
+.bar {
+  border: 1px solid #fff;
+  width: 400px;
+  height: 40px;
+  position: relative;
+}
+
+.bar > div {
+  height: 100%;
+  background-color: #fff;
+  width: 0px;
+}

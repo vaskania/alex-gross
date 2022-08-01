@@ -3,9 +3,7 @@
   flex-direction: column;
   position: relative;
   width: 400px;
-  min-height: 200px;
   font-size: 0.8rem;
-  /* justify-content: center; */
 }
 
 .dropdown {
@@ -25,7 +23,12 @@
 .options {
   border: 1px solid #fff;
   font-weight: 300;
+  position: absolute;
+  box-sizing: border-box;
+  top: 40px;
+  background-color: black;
   padding: 0 10px;
+  width: 100%;
 }
 
 .options span {
