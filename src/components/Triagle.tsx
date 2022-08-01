@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const Triagle = ({ rotate }: { rotate: boolean }) => {
   return (
     <div
