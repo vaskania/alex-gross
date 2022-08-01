@@ -1,4 +1,4 @@
-import { FormEventHandler, useContext } from "react";
+import { FormEventHandler } from "react";
 import { Answer } from "../components/Question";
 import classes from "../styles/checkbox.module.css";
 
