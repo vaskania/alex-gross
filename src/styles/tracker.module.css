@@ -1,0 +1,26 @@
+.trackerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  position: fixed;
+  bottom: 10px;
+}
+
+.trackerContainer .tracker {
+  border: 1px solid #fff;
+  height: 10px;
+  border-radius: 20px;
+}
+
+.tracker div {
+  background-color: rebeccapurple;
+  height: 100%;
+  border-radius: 20px;
+  width: 0%;
+  background-color: #fff;
+}
+.trackerContainer p {
+  align-self: flex-end;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.77rem;
+}

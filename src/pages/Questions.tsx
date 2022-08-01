@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Question } from "../components/Question";
+import { Tracker } from "../components/Tracker";
 import { AppContext } from "../context/App.context";
 import { questions } from "../data/data";
 
@@ -18,6 +19,16 @@ export const Questions = () => {
         alignItems: "center",
       }}
     >
+      <span
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          fontSize: "0.8rem",
+        }}
+      >
+        Survey for {ctx?.name.name}
+      </span>
       <Question {...questions[current]} />
 
       <Button
@@ -39,6 +50,8 @@ export const Questions = () => {
         transparent
         onClick={() => setCurrent((c) => c - 1)}
       />
+
+      <Tracker current={current + 1} total={questions.length} />
     </section>
   );
 };

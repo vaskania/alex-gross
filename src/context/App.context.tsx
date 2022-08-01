@@ -6,6 +6,12 @@ import {
   useState,
 } from "react";
 
+interface SelectedAnswer {
+  value: string;
+  type: string;
+  point: number;
+}
+
 interface IAppContext {
   name: {
     name: string;
@@ -16,15 +22,9 @@ interface IAppContext {
     setPoint: Dispatch<SetStateAction<number>>;
   };
   selectedAnswers: {
-    selected: Array<{
-      value: string;
-      point: number;
-    }>;
-    setAnswers: (answer: {
-      value: string;
-      type: string;
-      point: number;
-    }) => void;
+    selected: Array<SelectedAnswer>;
+    setAnswers: (answer: SelectedAnswer) => void;
+    reset: () => void;
   };
 }
 
@@ -33,19 +33,9 @@ export const AppContext = createContext<IAppContext | null>(null);
 export const ContextProvider = ({ children }: PropsWithChildren) => {
   const [name, setName] = useState<string>("");
   const [point, setPoint] = useState<number>(0);
-  const [selected, setSelected] = useState<
-    Array<{
-      value: string;
-      point: number;
-      type: string;
-    }>
-  >([]);
+  const [selected, setSelected] = useState<Array<SelectedAnswer>>([]);
 
-  const setAnswers = (answer: {
-    value: string;
-    point: number;
-    type: string;
-  }) => {
+  const setAnswers = (answer: SelectedAnswer) => {
     if (answer.type === "dropdown" || answer.type == "select") {
       setSelected((s) => [...s.filter((e) => e.type !== answer.type)]);
     }
@@ -57,6 +47,9 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     setSelected((e) => [...e, { ...answer }]);
   };
 
+  const reset = () => {
+    setSelected([]);
+  };
   const context: IAppContext = {
     name: {
       name,
@@ -69,6 +62,7 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     selectedAnswers: {
       selected,
       setAnswers,
+      reset,
     },
   };
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
