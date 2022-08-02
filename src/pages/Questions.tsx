@@ -10,6 +10,14 @@ export const Questions = () => {
     const [current, setCurrent] = useState<number>(0);
     const navigate = useNavigate();
     const ctx = useContext(AppContext);
+
+    const handleClickBack = () => setCurrent((c) => c - 1)
+    const handleClickNextOrFinish = () => {
+        if (current >= 2) return navigate("/result");
+        if (current === 2) return;
+        setCurrent((c) => c + 1);
+    }
+
     return (
         <section
             style={{
@@ -35,11 +43,7 @@ export const Questions = () => {
                 label={current >= 2 ? "finish" : "next"}
                 size={10}
                 rightArrow
-                onClick={() => {
-                    if (current >= 2) return navigate("/result");
-                    if (current === 2) return;
-                    setCurrent((c) => c + 1);
-                }}
+                onClick={handleClickNextOrFinish}
             />
 
             <Button
@@ -48,7 +52,7 @@ export const Questions = () => {
                 leftArrow
                 disabled={current < 1}
                 transparent
-                onClick={() => setCurrent((c) => c - 1)}
+                onClick={handleClickBack}
             />
 
             <Tracker current={current + 1} total={questions.length}/>

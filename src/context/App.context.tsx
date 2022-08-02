@@ -36,7 +36,7 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
   const [selected, setSelected] = useState<Array<SelectedAnswer>>([]);
 
   const setAnswers = (answer: SelectedAnswer) => {
-    if (answer.type === "dropdown" || answer.type == "select") {
+    if (answer.type === "dropdown" || answer.type === "select") {
       setSelected((s) => [...s.filter((e) => e.type !== answer.type)]);
     }
 

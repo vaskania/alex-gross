@@ -23,6 +23,15 @@ export interface IQuestion {
 export const Question = ({answers, body, type, question}: IQuestion) => {
     const ctx = useContext(AppContext);
 
+    const handleChange = (e: any, type: string) => {
+        ctx?.selectedAnswers.setAnswers({
+            point: answers.find((a) => a.value === e.target.value)
+                ?.point as number,
+            value: e.target.value,
+            type,
+        });
+    }
+
     return (
         <section className={classes.question}>
             <p>QUESTION {question}</p>
@@ -30,26 +39,14 @@ export const Question = ({answers, body, type, question}: IQuestion) => {
             {type === "select" ? (
                 <Select
                     data={answers}
-                    onChange={(e: any) => {
-                        ctx?.selectedAnswers.setAnswers({
-                            point: answers.find((a) => a.value === e.target.value)
-                                ?.point as number,
-                            value: e.target.value,
-                            type: "select",
-                        });
+                    onChange={(e) => {
+                        handleChange(e, "select")
                     }}
                 />
             ) : type === "multiselect" ? (
                 <MultiSelect
                     data={answers}
-                    onChange={(e: any) => {
-                        ctx?.selectedAnswers.setAnswers({
-                            point: answers.find((a) => a.value === e.target.value)
-                                ?.point as number,
-                            value: e.target.value,
-                            type: "multiselect",
-                        });
-                    }}
+                    onChange={(e: any) => handleChange(e, "multiselect")}
                 />
             ) : (
                 <Dropdown
